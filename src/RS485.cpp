@@ -156,8 +156,8 @@ void RS485Class::receive()
   if (_rePin > -1) {
     digitalWrite(_rePin, LOW);
   }
-  volatile uint32_t *portb = 0x58020410;
-  uint32_t *usart3_cr = 0x40004800;
+  volatile uint32_t *portb = (uint32_t *)(0x58020410);
+  uint32_t* usart3_cr = (uint32_t *)(0x40004800);
   while ((*portb)&0x4000);
   *usart3_cr |= 4;
 }
@@ -167,7 +167,7 @@ void RS485Class::noReceive()
   if (_rePin > -1) {
     digitalWrite(_rePin, HIGH);
   }
-  uint32_t *usart3_cr = 0x40004800;  
+  uint32_t *usart3_cr = (uint32_t *)(0x40004800);  
   *usart3_cr &= ~4;
 }
 
